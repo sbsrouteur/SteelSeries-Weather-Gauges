@@ -220,6 +220,38 @@
 #set $fc = 'forecast is not available'
 #end if
 ##
+#set $periods = $forecast.weather_periods('WU')
+#if len($periods) > 0
+  #set $wts = ''
+  #set $wloc = ''
+  #set $fc = ''
+  #set $Loops = 0
+  #for $period in $periods
+    #set $wts = $period.issued_ts
+    #set $wloc = $period.location
+	#if $period.event_ts is not None
+		#set $fc +=$period.event_ts.string('') + ' '
+	#end if
+	#if $period.temp is not None
+		#set $fc += $period.temp.string('') + ' '
+	#end if
+	#if $period.clouds is None
+		#set $fc += 'N/A'
+	#else
+		#set $fc += $forecast.label('Weather', $period.clouds)
+		##set $fc += $period.clouds
+	#end if
+	#set $fc += '     '
+	#if $Loops > 10
+		#break
+	#else
+		#set $Loops += 1
+	#end if
+  #end for
+#else
+  #set $fc='No forecast available'
+#end if
+##
 #set $_trend = $trend(time_delta=3600).outTemp.raw
 #if $_trend is None
 #set $_trend = 0
@@ -378,5 +410,7 @@
           "forecast":"$fc",
            "version":"$station.version",
              "build":"",
-               "ver":"14"
+             "pm2_5":"$pm2_5",
+             "pm10":"$pm10",
+               "ver":"15"
 }
