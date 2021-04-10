@@ -43,14 +43,14 @@
 		  <div class="row">
 			<div class="gauge">
 			  <div id="tip_0">
-				<canvas id="canvas_temp" class="gaugeSizeStd"></canvas>
+				<canvas id="canvas_temp" class="gaugeSizeSml"></canvas>
 			  </div>
 			  <input id="rad_temp1" type="radio" name="rad_temp" value="out" checked onclick="gauges.doTemp(this);"><label id="lab_temp1" for="rad_temp1">Outside</label>
 			  <input id="rad_temp2" type="radio" name="rad_temp" value="in" onclick="gauges.doTemp(this);"><label id="lab_temp2" for="rad_temp2">Inside</label>
 			</div>
 			<div class="gauge">
 			  <div id="tip_1">
-				<canvas id="canvas_dew" class="gaugeSizeStd"></canvas>
+				<canvas id="canvas_dew" class="gaugeSizeSml"></canvas>
 			  </div>
 			  <input id="rad_dew1" type="radio" name="rad_dew" value="dew" onclick="gauges.doDew(this);"><label id="lab_dew1" for="rad_dew1">Dew Point</label>
 			  <input id="rad_dew2" type="radio" name="rad_dew" value="app" checked onclick="gauges.doDew(this);"><label id="lab_dew2" for="rad_dew2">Apparent</label>
@@ -62,44 +62,50 @@
 			</div>
 			<div class="gauge">
 			  <div id="tip_4">
-				<canvas id="canvas_hum" class="gaugeSizeStd"></canvas>
+				<canvas id="canvas_hum" class="gaugeSizeSml"></canvas>
 			  </div>
 			  <input id="rad_hum1" type="radio" name="rad_hum" value="out" checked onclick="gauges.doHum(this);"><label id="lab_hum1" for="rad_hum1">Outside</label>
 			  <input id="rad_hum2" type="radio" name="rad_hum" value="in" onclick="gauges.doHum(this);"><label id="lab_hum2" for="rad_hum2">Inside</label>
 			</div>
 			<div id="tip_5" class="gauge">
-			  <canvas id="canvas_baro" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_baro" class="gaugeSizeSml"></canvas>
 			</div>
 			
 		  </div>
 		  <div class="row">
 			<div id="tip_6" class="gauge">
-			  <canvas id="canvas_wind" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_wind" class="gaugeSizeSml"></canvas>
 			</div>
 			<div id="tip_7" class="gauge">
-			  <canvas id="canvas_dir" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_dir" class="gaugeSizeSml"></canvas>
 			</div>
 			<div id="tip_10" class="gauge">
-			  <canvas id="canvas_rose" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_rose" class="gaugeSizeSml"></canvas>
 			</div>
 		  </div>
 		  <div class="row">
 			<div id="tip_8" class="gauge">
-			  <canvas id="canvas_uv" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_uv" class="gaugeSizeSml"></canvas>
 			</div>
 			<div id="tip_2" class="gauge">
-			  <canvas id="canvas_rain" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_rain" class="gaugeSizeSml"></canvas>
 			</div>
 			<div id="tip_3" class="gauge">
-			  <canvas id="canvas_rrate" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_rrate" class="gaugeSizeSml"></canvas>
 			</div>
 		  </div>
 		  <div class="row">
 			<div id="tip_9" class="gauge">
-			  <canvas id="canvas_solar" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_solar" class="gaugeSizeSml"></canvas>
+			</div>
+			<div id="tip_12" class="gauge">
+			  <canvas id="canvas_pm2_5" class="gaugeSizeSml"></canvas>
+			</div>
+			<div id="tip_13" class="gauge">
+			  <canvas id="canvas_pm10" class="gaugeSizeSml"></canvas>
 			</div>
 			<div id="tip_11" class="gauge">
-			  <canvas id="canvas_cloud" class="gaugeSizeStd"></canvas>
+			  <canvas id="canvas_cloud" class="gaugeSizeSml"></canvas>
 			</div>
 		  </div>
 

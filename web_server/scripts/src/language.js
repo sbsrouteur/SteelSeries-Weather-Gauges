@@ -181,7 +181,21 @@ LANG.EN = {
     //
     coords            : ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'],
     compass           : ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'],
-    months            : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    months            : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    //
+    pm25_title          : '2.5µ Particles ',
+    pm10_title          : '10µ Particles',
+    pm_levels         : ['Very low',
+                         'Low',
+                         'Moderate',
+                         'High',
+                         'Very High'],
+    pm_headlines      : ['Very low',
+                        'Low',
+                        'Moderate',
+                        'High',
+                        'Very High'],
+    
 };
 
 //======================================================================================================================
@@ -361,7 +375,20 @@ LANG.FR = {
     //
     coords            : ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSO', 'SO', 'OSO', 'O', 'ONO', 'NO', 'NNO'],
     compass           : ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'],
-    months            : ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc']
+    months            : ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+    //
+    pm25_title          : 'Particules 2.5µ',
+    pm10_title          : 'Particules 10µ',
+    pm_levels         : ['Très bas',
+                         'Bas',
+                         'Moderé',
+                         'Elevé',
+                         'Très élevé'],
+    pm_headlines      : ['Très bas',
+                        'Bas',
+                        'Moderé',
+                        'Elevé',
+                        'Très élevé'],
 };
 
 //======================================================================================================================
