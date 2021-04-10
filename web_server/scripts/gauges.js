@@ -2675,7 +2675,7 @@ function () {
                     steelseries.Section(30, 55, '#f85900'),
                     steelseries.Section(55, 110, '#d8001d')
                 ];
-                // Define value gradient for UV
+                // Define value gradient for pm
                 cache.gradient = new steelseries.gradientWrapper(0, 16,
                     [0, 0.1, 0.19, 0.31, 0.45, 0.625, 1],
                     [
@@ -2796,14 +2796,14 @@ function () {
                 // define UV start values
                 cache.value = 0.0001;
                 cache.sections = [
-                    steelseries.Section(0, 15, '#289500'),
-                    steelseries.Section(15, 30, '#f7e400'),
-                    steelseries.Section(30, 55, '#f85900'),
-                    steelseries.Section(55, 110, '#d8001d')
+                    steelseries.Section(0, 25, '#289500'),
+                    steelseries.Section(25, 50, '#f7e400'),
+                    steelseries.Section(50, 90, '#f85900'),
+                    steelseries.Section(90, 180, '#d8001d')
                 ];
                 // Define value gradient for UV
                 cache.gradient = new steelseries.gradientWrapper(0, 110,
-                    [0, 15/110, 30/110, 55/110, 1],
+                    [0, 25/180, 50/180, 90/180, 1],
                     [
                         new steelseries.rgbaColor(0, 255, 0, 1),
                         new steelseries.rgbaColor(0, 255, 0, 1),
@@ -2855,13 +2855,13 @@ function () {
 
                     cache.value = extractDecimal(data.pm10);
 
-                    if (cache.value < 15) {
+                    if (cache.value < 25) {
                         indx = 0;
-                    } else if (cache.value < 30) {
+                    } else if (cache.value < 50) {
                         indx = 1;
-                    } else if (cache.value < 55) {
+                    } else if (cache.value < 90) {
                         indx = 2;
-                    } else if (cache.value < 110) {
+                    } else if (cache.value < 180) {
                         indx = 3;
                     } else {
                         indx = 4;
@@ -2970,6 +2970,10 @@ function () {
                 // wait 5 seconds, then try again...
                 downloadTimer = setTimeout(getRealtime, 5000);
             }
+        },
+        CurrentData = function()
+        {
+            return data;
         },
 
         //
@@ -4360,7 +4364,8 @@ function () {
     return {
         setLang    : setLang,
         setUnits   : setUnits,
-        processData: processData
+        processData: processData,
+		currentData: CurrentData,
     };
 }()),
 

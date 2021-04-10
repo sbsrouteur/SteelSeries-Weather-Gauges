@@ -17,8 +17,8 @@
   <div class="container-fluid">
     <h1>$station.location <span id="lang_weather">weather</span></h1>
     <p style="text-align: left; text-transform: none;">&nbsp;<span id="lang_latitude">Latitude</span>&nbsp;$station.latitude[0]&deg;&nbsp;$station.latitude[1]'&nbsp;$station.latitude[2]&nbsp;&nbsp;&nbsp;&nbsp;<span id="lang_longitude">Longitude</span>&nbsp;$station.longitude[0]&deg;&nbsp;$station.longitude[1]'&nbsp;$station.longitude[2]&nbsp;&nbsp;&nbsp;&nbsp;<span id="lang_elevation">Elevation</span>&nbsp;$station.altitude</p>
-	<p style="text-align: left; text-transform: none;">Station uptime:$station.uptime </p>
-	<p style="text-align: left; text-transform: none;">Server uptime:$station.os_uptime</p>
+	<p id="weewx_uptime" style="text-align: left; text-transform: none;">Station uptime:$station.uptime </p>
+	<p id="uptime" style="text-align: left; text-transform: none;">Server uptime:$station.os_uptime</p>
     <noscript>
       <h2 style="color:red; text-align:center">&gt;&gt;This pages requires JavaScript enabling in your browser.&lt;&lt;<br>&gt;&gt;Please enable scripting it to enjoy this site at its best.&lt;&lt;</h2>
     </noscript>
@@ -28,6 +28,12 @@
 		<div class="col-xs-12 col-sm-4">
 			<div class="row">
 				#include "../forecast/forecast_iconic_color.inc"
+			</div>
+			<div class="row" style="height: 18px;"></div>
+			<div class="row" style="height: 120px;">
+				<div class="col-xs-9" id="AQIBox" style="height:100%;background-color:lightgrey">
+				<h1 id="AQIValue" class="display-1">--</h1>
+				</div>
 			</div>
 			<div class="row" style="height: 18px;"></div>
 			<div class="row text-left">
@@ -227,7 +233,9 @@
   <!--Optional Wind Rose scripts -->
   <script src="scripts/RGraph.common.core.min.js"></script>
   <script src="scripts/RGraph.rose.min.js"></script>
+  <script src="scripts/AQI.js"></script>
   <script>
+	
 	  function ReloadAwekas()
 	  {
 		const frame = document.getElementById("awk_frame");
@@ -236,6 +244,7 @@
 	  };
 	  
 	  setInterval(ReloadAwekas,60000);
+	  setInterval(UpdateAQIDisplay,2000);
   </script>
 
 </body>
