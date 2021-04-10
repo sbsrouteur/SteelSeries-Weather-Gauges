@@ -2762,7 +2762,7 @@ function () {
                 } // End of update()
 
                 function updateGraph(evnt, cacheDefeat) {
-                    if (config.tipImgs[8] !== null) {
+                    if (config.tipImgs[12] !== null) {
                         $('#imgtip12_img').attr('src', config.imgPathURL + config.tipImgs[12] + cacheDefeat);
                     }
                 }
@@ -2887,7 +2887,7 @@ function () {
                 } // End of update()
 
                 function updateGraph(evnt, cacheDefeat) {
-                    if (config.tipImgs[8] !== null) {
+                    if (config.tipImgs[13] !== null) {
                         $('#imgtip13_img').attr('src', config.imgPathURL + config.tipImgs[13] + cacheDefeat);
                     }
                 }
@@ -3310,6 +3310,8 @@ function () {
                 $('#imgtip9_img').attr('src', config.imgPathURL + config.tipImgs[9] + cacheDefeat);
                 $('#imgtip10_img').attr('src', config.imgPathURL + config.tipImgs[10] + cacheDefeat);
                 $('#imgtip11_img').attr('src', config.imgPathURL + config.tipImgs[11] + cacheDefeat);
+                $('#imgtip12_img').attr('src', config.imgPathURL + config.tipImgs[12] + cacheDefeat);
+                $('#imgtip13_img').attr('src', config.imgPathURL + config.tipImgs[13] + cacheDefeat);
                 // start a timer for popup graphic updates
                 setInterval(
                     function timeout() {
