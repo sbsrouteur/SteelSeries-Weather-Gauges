@@ -62,7 +62,7 @@ function UpdateAQIDisplay()
 		if (Idx10 > Idx25)
 		{
 			let Idx=Idx10;
-			IdxText = GetIndexValue(CurPm10,Idx10,Pm10Thresholds);
+			IdxText = GetIndexValue(CurPM10,Idx10,Pm10Thresholds);
 		}
 		else
 		{
