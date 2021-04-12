@@ -221,6 +221,8 @@
 #end if
 ##
 #set $periods = $forecast.weather_periods('WU')
+#set $WU_ICON_LABELS = ["Tornado","Tropical Storm","Hurricane","Strong Storms","Thunderstorms","Rain / Snow","Rain / Sleet","Wintry Mix","Freezing Drizzle","Drizzle","Freezing Rain","Showers","Rain","Flurries","Snow Showers","Blowing / Drifting Snow","Snow","Hail","Sleet","Blowing Dust / Sandstorm","Foggy","Haze","Smoke","Breezy","Windy","Frigid / Ice Crystals","Cloudy","Mostly Cloudy","Mostly Cloudy","Partly Cloudy","Partly Cloudy","Clear","Sunny","Fair / Mostly Clear","Fair / Mostly Sunny","Mixed Rain and Hail","Hot","Isolated Thunderstorms","Scattered Thunderstorms","Scattered Showers","Heavy Rain","Scattered Snow Showers","Heavy Snow","Blizzard","Not Available (N/A)","Scattered Showers","Scattered Snow Showers","Scattered Thunderstorms"]
+
 #if len($periods) > 0
   #set $wts = ''
   #set $wloc = ''
@@ -238,7 +240,7 @@
 	#if $period.clouds is None
 		#set $fc += 'N/A'
 	#else
-		#set $fc += $forecast.label('Weather', $period.clouds)
+		#set $fc += $WU_ICON_LABELS[int($period.clouds)]
 		##set $fc += $period.clouds
 	#end if
 	#set $fc += '     '
