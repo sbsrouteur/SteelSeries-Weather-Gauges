@@ -57,16 +57,18 @@ function UpdateAQIDisplay()
 		
 		let Idx25 = GetPMLevel(CurPM2_5,Pm25Thresholds);
 		let Idx10 = GetPMLevel(CurPM10,Pm10Thresholds);
+		let IdxText25 = GetIndexValue(CurPM2_5,Idx25,Pm25Thresholds);
+		let IdxText10 = GetIndexValue(CurPM10,Idx10,Pm10Thresholds);
 		let Idx = Idx25;
-		let IdxText="";
+		let IdxText=IdxText25 ;
 		if (Idx10 > Idx25)
 		{
-			let Idx=Idx10;
-			IdxText = GetIndexValue(CurPM10,Idx10,Pm10Thresholds);
+			Idx=Idx10;
 		}
-		else
+		
+		if (IdxText10 > IdxText25)
 		{
-			IdxText = GetIndexValue(CurPM2_5,Idx25,Pm25Thresholds);
+			IdxText = IdxText10;
 		}
 		Box.css("backgroundColor",Colors[Idx]);
 		

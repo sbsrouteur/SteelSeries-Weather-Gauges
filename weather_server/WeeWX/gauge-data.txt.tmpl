@@ -329,6 +329,8 @@
 #set $hourlyrainTH = $hourlyrainTH * $rain_mult
 #set $hourlyrainTH = $rain_format % $hourlyrainTH
 ##
+#set $Avg1hPM25 = $hour.pm2_5.max
+#set $Avg1hPM10 = $hour.pm10_0.max
 {
            "timeUTC":"$timeutc",
               "date":"$current.dateTime.format('%Y.%m.%d %H:%M')",
@@ -414,5 +416,7 @@
              "build":"",
              "pm2_5":"$current.pm2_5.formatted",
               "pm10":"$current.pm10_0.formatted",
+         "Avg1hPM25":"$Avg1hPM25",
+		 "Avg1hPM10":"$Avg1hPM10",
 			   "ver":"15"
 }
