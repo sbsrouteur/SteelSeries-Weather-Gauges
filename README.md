@@ -5,4 +5,9 @@ HTML 5 Weather Gauges Templates for Cumulus, Weather Display, WeatherCat, and ot
 
 As there is no setup for this variation, the easiest for installing is : 
   - Run the standard SS skin package
-  - The copy the files from /weather_server/WeeWX/ to you ss skin folder.
+  - overwrite follwong files from you ss skin folder :
+  ```
+     cp ./SteelSeries-Weather-Gauges/weather_server/WeeWX/* .
+     cp -r ./SteelSeries-Weather-Gauges/web_server/scripts/* ./scripts
+    
+  ```
