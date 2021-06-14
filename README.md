@@ -5,6 +5,10 @@ HTML 5 Weather Gauges Templates for Cumulus, Weather Display, WeatherCat, and ot
 
 As there is no setup for this variation, the easiest for installing is : 
   - Run the standard SS skin package
+  - Run the setup for forecast extension (variation is required for new WU Icons in forecast section)
+    -  Git Clone the forecast repo : https://github.com/sbsrouteur/weewx-forecast.git
+    -  install the extension from the downloaded folder : 
+      - ./bin/wee_extension --install <Cloned Source Folder>/Weewx/weewx-forecast/
   - overwrite follwong files from you ss skin folder :
   ```
      cp ./SteelSeries-Weather-Gauges/weather_server/WeeWX/* .
