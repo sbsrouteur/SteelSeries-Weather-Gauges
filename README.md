@@ -8,8 +8,9 @@ As there is no setup for this variation, the easiest for installing is :
   - Run the setup for forecast extension (variation is required for new WU Icons in forecast section)
     -  Git Clone the forecast repo : https://github.com/sbsrouteur/weewx-forecast.git
     -  install the extension from the downloaded folder : 
-      - ./bin/wee_extension --install <Cloned Source Folder>/Weewx/weewx-forecast/
-  - overwrite follwong files from you ss skin folder :
+    
+    ```./bin/wee_extension --install <Cloned Source Folder>/Weewx/weewx-forecast/```
+  - overwrite following files from your ss skin folder :
   ```
      cp ./SteelSeries-Weather-Gauges/weather_server/WeeWX/* .
      cp -r ./SteelSeries-Weather-Gauges/web_server/scripts/* ./scripts
