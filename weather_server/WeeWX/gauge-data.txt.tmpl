@@ -38,6 +38,7 @@
 ## ver:13
 ## changed UoMs
 ##
+#try
 #import math
 #import time
 ##
@@ -240,7 +241,13 @@
 	#if $period.clouds is None
 		#set $fc += 'N/A'
 	#else
-		#set $fc += $WU_ICON_LABELS[int($period.clouds)]
+		#set $WUTitle=$period.clouds			
+		#if $WUTitle is not None and $WUTitle.isdigit()
+			#set $WUTitle=$WU_ICON_LABELS[$WUTitle]
+		#else
+			#set $WUTitle='N/A'
+		#end if
+		#set $fc += $WUTitle
 		##set $fc += $period.clouds
 	#end if
 	#set $fc += '     '
@@ -420,3 +427,7 @@
 		 "Avg1hPM10":"$Avg1hPM10",
 			   "ver":"15"
 }
+
+#except
+	$sys.exc_info()[1]
+#end try
