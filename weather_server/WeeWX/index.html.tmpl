@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <title>$station.location weather</title>
   <link rel="stylesheet" href="css/gauges-ss.css">
+  <link rel="stylesheet" href="../forecast/forecast_iconic.css">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -25,8 +26,9 @@
   </div>
   <div class="container-fluid">
 	<div class = row>
-		<div class="col-xs-12 col-sm-4">
+		<div class="col-xs-12 col-sm-5">
 			<div class="row">
+				#set global $RelFolder="../forecast/"
 				#include "../forecast/forecast_iconic_color.inc"
 			</div>
 			<div class="row" style="height: 18px;"></div>
@@ -40,7 +42,7 @@
 				<iframe id="awk_frame" src="https://widget.awekas.at/widget4.php?id=18159&lng=fr&uni=c&wuni=km&rad=0&bg=#178bcf1a&co=#000000ff&bo=#b9b9b9ff" width="300" height="250" scrolling="no" marginheight="0" marginwidth="0" frameborder="0" name="AWEKAS Wetterwidget"></iframe>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-8">
+		<div class="col-xs-12 col-sm-7">
 		  <div class="row">
 			<canvas id="canvas_led" width="25" height="25"></canvas>&nbsp;&nbsp;
 			<canvas id="canvas_status" width="550" height="25"></canvas>&nbsp;&nbsp;
