@@ -243,7 +243,7 @@
 	#else
 		#set $WUTitle=$period.clouds			
 		#if $WUTitle is not None and $WUTitle.isdigit()
-			#set $WUTitle=$WU_ICON_LABELS[$WUTitle]
+			#set $WUTitle=$WU_ICON_LABELS[int($WUTitle)]
 		#else
 			#set $WUTitle='N/A'
 		#end if
