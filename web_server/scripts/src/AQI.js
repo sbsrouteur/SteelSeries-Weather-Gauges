@@ -52,8 +52,8 @@ function UpdateAQIDisplay()
 	
 	if (typeof gauges !== "undefined" && gauges.currentData)
 	{
-		CurPM2_5=gauges.currentData().pm2_5;//_1h_Avg;
-		CurPM10=gauges.currentData().pm10;//_1h_Avg;
+		CurPM2_5=gauges.currentData().Avg1hPM25;//_1h_Avg;
+		CurPM10=gauges.currentData().Avg1hPM10;//_1h_Avg;
 		
 		let Idx25 = GetPMLevel(CurPM2_5,Pm25Thresholds);
 		let Idx10 = GetPMLevel(CurPM10,Pm10Thresholds);
