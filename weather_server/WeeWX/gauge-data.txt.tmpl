@@ -39,6 +39,9 @@
 ## changed UoMs
 ##
 #try
+##
+#set $Avg1hPM25 = $hour.pm2_5.max.raw
+#set $Avg1hPM10 = $hour.pm10_0.max.raw
 #import math
 #import time
 ##
@@ -65,21 +68,22 @@
 ## calculate humidex
 ## http://www.physlink.com/reference/weather.cfm
 #if $varExists('current.outTemp') and $current.outTemp.raw is not None and $varExists('current.dewpoint') and $current.dewpoint.raw is not None
-#set $oT_C = $current.outTemp.degree_C.raw
-#set $dp_K = $current.dewpoint.degree_C.raw + 273.16
-#set $e = 6.11 * math.exp(5417.7530 * ((1/273.16) - 1/$dp_K))
-#set $h = 0.5555 * ($e - 10.0)
-#if $h > 0
-#set $humidex = $oT_C + $h
+	#set $oT_C = $current.outTemp.degree_C.raw
+	#set $dp_K = $current.dewpoint.degree_C.raw + 273.16
+	#set $e = 6.11 * math.exp(5417.7530 * ((1/273.16) - 1/$dp_K))
+	#set $h = 0.5555 * ($e - 10.0)
+	#if $h > 0
+		#set $humidex = $oT_C + $h
+	#else
+		#set $humidex = $oT_C
+	#end if
+	
+	#if $unit.unit_type.outTemp == 'degree_F'
+		#set $humidex = 32.0 + 1.8 * $humidex
+	#end if
+	#set $humidex = $temp_format % $humidex
 #else
-#set $humidex = $oT_C
-#end if
-#if $unit.unit_type.outTemp == 'degree_F'
-#set $humidex = 32.0 + 1.8 * $humidex
-#end if
-#set $humidex = $temp_format % $humidex
-#else
-#set $humidex = 'N/A'
+	#set $humidex = 'N/A'
 #end if
 ##
 ## calculate apparent temperature
@@ -98,29 +102,29 @@
 ##   e is vapor pressure in kPa,
 ##   and v is 10m wind speed in m/sec
 ##
-#if $varExists('current.outTemp') and $current.outTemp.raw is not None and $varExists('current.outHumidity') and $current.outHumidity.raw is not None and $varExists('current.windSpeed') and $current.windSpeed.raw is not None
-#set $oT_C = $current.outTemp.degree_C.raw
-#set $rh = $current.outHumidity.raw
-#set $ws = $current.windSpeed.meter_per_second.raw
-#set $e = ($rh / 100) * 6.105 * math.exp(17.27 * $oT_C / (237.7 + $oT_C))
-#set $apptemp = $oT_C + 0.33 * $e - 0.7 * $ws - 4.0
-#if $unit.unit_type.outTemp == 'degree_F'
-#set $apptemp = 32.0 + 1.8 * $apptemp
-#end if
-#set $apptemp = $temp_format % $apptemp
+#if $varExists('current.outTemp') and $current.outTemp.raw is not None and $varExists('current.outHumidity') and $current.outHumidity.raw is not None and $varExists('current.windSpeed') and 	$current.windSpeed.raw is not None
+	#set $oT_C = $current.outTemp.degree_C.raw
+	#set $rh = $current.outHumidity.raw
+	#set $ws = $current.windSpeed.meter_per_second.raw
+	#set $e = ($rh / 100) * 6.105 * math.exp(17.27 * $oT_C / (237.7 + $oT_C))
+	#set $apptemp = $oT_C + 0.33 * $e - 0.7 * $ws - 4.0
+	#if $unit.unit_type.outTemp == 'degree_F'
+		#set $apptemp = 32.0 + 1.8 * $apptemp
+	#end if
+	#set $apptemp = $temp_format % $apptemp
 #else
-#set $apptemp = 'N/A'
+	#set $apptemp = 'N/A'
 #end if
 ##
 ## calculate the cloud base in feet
 #if $varExists('current.outTemp') and $current.outTemp.raw is not None and $varExists('current.dewpoint') and $current.dewpoint.raw is not None
-#set $oT_F = $current.outTemp.degree_F.raw
-#set $dp_F = $current.dewpoint.degree_F.raw
-#set $a_f = $station.altitude.foot.raw
-#set $cloudbase = (($oT_F - $dp_F) / 4.4 * 1000) + $a_f
-#set $cloudbase = $cloudbase_format % $cloudbase
+	#set $oT_F = $current.outTemp.degree_F.raw
+	#set $dp_F = $current.dewpoint.degree_F.raw
+	#set $a_f = $station.altitude.foot.raw
+	#set $cloudbase = (($oT_F - $dp_F) / 4.4 * 1000) + $a_f
+	#set $cloudbase = $cloudbase_format % $cloudbase
 #else
-#set $cloudbase = 'N/A'
+	#set $cloudbase = 'N/A'
 #end if
 ##
 ## calculate the wind run for the day
@@ -128,13 +132,13 @@
 #set $t = time.localtime($ts)
 #set $windrun = 0
 #for $n in range($t[3])
-#set $ago = $hours_ago(hours_ago=$n).windSpeed.avg.raw
-#if $ago is not None
-#set $windrun = $windrun + $ago
-#end if
+	#set $ago = $hours_ago(hours_ago=$n).windSpeed.avg.raw
+	#if $ago is not None
+		#set $windrun = $windrun + $ago
+	#end if
 #end for
 #if $unit.unit_type.windSpeed == 'meter_per_second'
-#set $windrun = $windrun / 3.6
+	#set $windrun = $windrun / 3.6
 #end if
 #set $windrun = $windrun_format % $windrun
 ##
@@ -148,77 +152,77 @@
 ##        z - elevation in meters
 ##
 #if $almanac.hasExtras
-#set $rs_el = $almanac.sun.alt
-#set $rs_R = $almanac.sun.earth_distance
-#set $rs_atc = 0.8
-#set $rs_z = $station.altitude.meter.raw
-#set $rs_nrel = 1367.0
-#set $rs_sinel = math.sin($rs_el * math.pi / 180.0)
-#if $rs_z is not None and $rs_R is not None
-#if $rs_sinel < 0
-#set $solarMax = 0
+	#set $rs_el = $almanac.sun.alt
+	#set $rs_R = $almanac.sun.earth_distance
+	#set $rs_atc = 0.8
+	#set $rs_z = $station.altitude.meter.raw
+	#set $rs_nrel = 1367.0
+	#set $rs_sinel = math.sin($rs_el * math.pi / 180.0)
+	#if $rs_z is not None and $rs_R is not None
+		#if $rs_sinel < 0
+			#set $solarMax = 0
+		#else
+			#set $rs_rm = math.pow((288.0-0.0065*$rs_z)/288.0,5.256)/($rs_sinel+0.15*math.pow($rs_el+3.885,-1.253))
+			#set $rs_toa = $rs_nrel * $rs_sinel / ($rs_R * $rs_R)
+			#set $solarMax = $rs_toa * math.pow($rs_atc, $rs_rm)
+		#end if
+		#set $solarMax = $radiation_format % $solarMax
+	#else
+		#set $solarMax = 'N/A'
+	#end if
 #else
-#set $rs_rm = math.pow((288.0-0.0065*$rs_z)/288.0,5.256)/($rs_sinel+0.15*math.pow($rs_el+3.885,-1.253))
-#set $rs_toa = $rs_nrel * $rs_sinel / ($rs_R * $rs_R)
-#set $solarMax = $rs_toa * math.pow($rs_atc, $rs_rm)
-#end if
-#set $solarMax = $radiation_format % $solarMax
-#else
-#set $solarMax = 'N/A'
-#end if
-#else
-#set $solarMax = 'N/A'
+	#set $solarMax = 'N/A'
 #end if
 ##
 ## calculate today's highest beaufort based on wind speed in knots
 #if $varExists('day.windSpeed') and $day.windSpeed.max.raw is not None
-#if $unit.unit_type.windSpeed == 'mile_per_hour'
-#set $kts = $day.windSpeed.max.raw * 0.8689762
-#elif $unit.unit_type.windSpeed == 'km_per_hour'
-#set $kts = $day.windSpeed.max.raw * 0.539956
-#elif $unit.unit_type.windSpeed == 'meter_per_second'
-#set $kts = $day.windSpeed.max.raw * 1.943844
-#elif $unit.unit_type.windSpeed == 'knot'
-#set $kts = $day.windSpeed.max.raw
+	#if $unit.unit_type.windSpeed == 'mile_per_hour'
+		#set $kts = $day.windSpeed.max.raw * 0.8689762
+	#elif $unit.unit_type.windSpeed == 'km_per_hour'
+		#set $kts = $day.windSpeed.max.raw * 0.539956
+	#elif $unit.unit_type.windSpeed == 'meter_per_second'
+		#set $kts = $day.windSpeed.max.raw * 1.943844
+	#elif $unit.unit_type.windSpeed == 'knot'
+		#set $kts = $day.windSpeed.max.raw
+	#else
+		#set $kts = 0
+	#end if
+	#if $kts < 1
+		#set $beaufort = 0
+	#elif $kts < 4
+		#set $beaufort = 1
+	#elif $kts < 7
+		#set $beaufort = 2
+	#elif $kts < 11
+		#set $beaufort = 3
+	#elif $kts < 17
+		#set $beaufort = 4
+	#elif $kts < 22
+		#set $beaufort = 5
+	#elif $kts < 28
+		#set $beaufort = 6
+	#elif $kts < 34
+		#set $beaufort = 7
+	#elif $kts < 41
+		#set $beaufort = 8
+	#elif $kts < 48
+		#set $beaufort = 9
+	#elif $kts < 56
+		#set $beaufort = 10
+	#elif $kts < 64
+		#set $beaufort = 11
+	#else
+		#set $beaufort = 12
+	#end if
 #else
-#set $kts = 0
-#end if
-#if $kts < 1
-#set $beaufort = 0
-#elif $kts < 4
-#set $beaufort = 1
-#elif $kts < 7
-#set $beaufort = 2
-#elif $kts < 11
-#set $beaufort = 3
-#elif $kts < 17
-#set $beaufort = 4
-#elif $kts < 22
-#set $beaufort = 5
-#elif $kts < 28
-#set $beaufort = 6
-#elif $kts < 34
-#set $beaufort = 7
-#elif $kts < 41
-#set $beaufort = 8
-#elif $kts < 48
-#set $beaufort = 9
-#elif $kts < 56
-#set $beaufort = 10
-#elif $kts < 64
-#set $beaufort = 11
-#else
-#set $beaufort = 12
-#end if
-#else
-#set $beaufort = 'N/A'
+	#set $beaufort = 'N/A'
 #end if
 ##
 ## if forecasting is installed, report the Zambretti forecast
 #if $varExists('forecast.zambretti')
-#set $fc = $forecast.label('Zambretti', $forecast.zambretti.code)
+	#set $fc = $forecast.label('Zambretti', $forecast.zambretti.code)
 #else
-#set $fc = 'forecast is not available'
+	#set $fc = 'forecast is not available'
 #end if
 ##
 #set $periods = $forecast.weather_periods('WU')
@@ -263,13 +267,13 @@
 ##
 #set $_trend = $trend(time_delta=3600).outTemp.raw
 #if $_trend is None
-#set $_trend = 0
+	#set $_trend = 0
 #end if
-#set $t_trend = $temp_format % $_trend
+	#set $t_trend = $temp_format % $_trend
 ##
 #set $_trend = $trend(time_delta=10800).barometer.raw
 #if $_trend is None
-#set $_trend = 0
+	#set $_trend = 0
 #end if
 #set $p_trend = $press_format % $_trend
 ##
@@ -277,67 +281,65 @@
 ## Pressure UoM
 #set $UOM_bar = $unit.unit_type.barometer
 #if $UOM_bar == 'mbar'
-#set $UOM_bar = 'mb'
+	#set $UOM_bar = 'mb'
 #end if
 ##
 ## Temperature UoM
 #if $unit.unit_type.outTemp == 'degree_F'
-#set $UOM_temp = 'F'
+	#set $UOM_temp = 'F'
 #else
-#set $UOM_temp = 'C'
+	#set $UOM_temp = 'C'
 #end if
 ##
 ## Windspeed UoM
 #if $unit.unit_type.windSpeed == 'mile_per_hour'
-#set $UOM_wind = 'mph'
+	#set $UOM_wind = 'mph'
 #elif $unit.unit_type.windSpeed == 'km_per_hour'
-#set $UOM_wind = 'km/h'
+	#set $UOM_wind = 'km/h'
 #elif $unit.unit_type.windSpeed == 'knot'
-#set $UOM_wind = 'kts'
+	#set $UOM_wind = 'kts'
 #elif $unit.unit_type.windSpeed == 'meter_per_second'
-#set $UOM_wind = 'm/s'
+	#set $UOM_wind = 'm/s'
 #end if
 ##
 ## Rain UoM
 #set $rain_mult = 1
 #set $UOM_rain = $unit.unit_type.rain
 #if $unit.unit_type.rain == 'inch'
-#set $UOM_rain = 'in'
+	#set $UOM_rain = 'in'
 #elif $unit.unit_type.rain == 'cm'
-## Gauges do not handle cm, convert to mm
-#set $UOM_rain = 'mm'
-#set $rain_mult = 10
+	## Gauges do not handle cm, convert to mm
+	#set $UOM_rain = 'mm'
+	#set $rain_mult = 10
 #end if
 #if $day.rain.sum.has_data
-#set $day_rain = $rain_format % ($day.rain.sum.raw * $rain_mult)
+	#set $day_rain = $rain_format % ($day.rain.sum.raw * $rain_mult)
 #else
-#set $day_rain = 0.0
+	#set $day_rain = 0.0
 #end if
 #if $current.rainRate.raw is not None
-#set $current_rainrate = $rainrate_format % ($current.rainRate.raw * $rain_mult)
+	#set $current_rainrate = $rainrate_format % ($current.rainRate.raw * $rain_mult)
 #else
-#set $current_rainrate = 0.0
+	#set $current_rainrate = 0.0
 #end if
 #if $day.rainRate.max.has_data
-#set $day_rainrate_max = $rainrate_format % ($day.rainRate.max.raw * $rain_mult)
+	#set $day_rainrate_max = $rainrate_format % ($day.rainRate.max.raw * $rain_mult)
 #else
-#set $day_rainrate_max = 0.0
+	#set $day_rainrate_max = 0.0
 #end if
 ##
 ## Today's High Hourly Rain
 #set $hourlyrainTH = 0
 #set $ThourlyrainTH = ''
 #for $hour in $day.hours
-#if $hour.rain.sum.has_data and $hour.rain.sum.raw > $hourlyrainTH
-#set $hourlyrainTH = $hour.rain.sum.raw
-#set $ThourlyrainTH = $hour.dateTime.format("%H:%M")
-#end if
+	#if $hour.rain.sum.has_data and $hour.rain.sum.raw > $hourlyrainTH
+		#set $hourlyrainTH = $hour.rain.sum.raw
+		#set $ThourlyrainTH = $hour.dateTime.format("%H:%M")
+	#end if
 #end for
 #set $hourlyrainTH = $hourlyrainTH * $rain_mult
 #set $hourlyrainTH = $rain_format % $hourlyrainTH
-##
-#set $Avg1hPM25 = $hour.pm2_5.max
-#set $Avg1hPM10 = $hour.pm10_0.max
+
 {
            "timeUTC":"$timeutc",
               "date":"$current.dateTime.format('%Y.%m.%d %H:%M')",
@@ -427,6 +429,7 @@
 		 "Avg1hPM10":"$Avg1hPM10",
 			   "ver":"15"
 }
+
 
 #except
 	$sys.exc_info()[1]

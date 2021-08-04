@@ -31,7 +31,11 @@
 				#set global $RelFolder="../forecast/"
 				#include "../forecast/forecast_iconic_color.inc"
 			</div>
-			<div class="row" style="height: 18px;"></div>
+			<div class="row" style="height: 18px;">
+				#set $Avg1hPM25 = $hour.pm2_5.max.raw
+				#set $Avg1hPM10 = $hour.pm10_0.max.raw
+				<div style="visibility:hidden">$Avg1hPM25 $Avg1hPM10 </div>
+			</div>
 			<div class="row" style="height: 120px;">
 				<div class="col-xs-9" id="AQIBox" style="height:100%;background-color:lightgrey">
 				<h1 id="AQIValue" class="display-1">--</h1>
